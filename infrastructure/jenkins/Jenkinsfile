@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building Docker images...'
+                // Example: sh 'docker build -t booking-service ./microservices/booking-service'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // Example: sh 'docker run booking-service npm test'
+            }
+        }
+        stage('Push') {
+            steps {
+                echo 'Pushing images to ECR...'
+                // Example: sh 'docker push 726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/booking:latest'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to AWS ECS...'
+                // Example: sh 'aws ecs update-service ...'
+            }
+        }
+    }
+}
