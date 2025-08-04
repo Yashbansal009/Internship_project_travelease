@@ -1,0 +1,48 @@
+version: '3.8' 
+services:
+  booking-service:
+    image: 726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/booking:latest
+    ports:
+      - "5001:5000"
+
+  payment-service:
+    image: 726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/payment:latest
+    ports:
+      - "5002:5000"
+
+  user-service:
+    image: 726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/user:latest
+    ports:
+      - "5003:5000"
+
+
+  jenkins:
+    build: ./infrastructure/jenkins 
+    ports:
+      - "8080:8080" 
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home 
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./infrastructure/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infrastructure/monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin # Set default admin password (change in production)
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/default.json
+
+volumes:
+  jenkins_data: 
+  grafana_data: 

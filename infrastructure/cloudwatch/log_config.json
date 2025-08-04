@@ -1,0 +1,18 @@
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/app.log",
+            "log_group_name": "travelease-app-logs", 
+            "log_stream_name": "booking-service",
+            "timestamp_format": "%Y-%m-%d %H:%M:%S"
+          }
+        ]
+      }
+    },
+    "log_stream_name": "booking-service",
+    "log_group_name": "travelease-app-logs"
+  }
+}
