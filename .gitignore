@@ -1,0 +1,8 @@
+# Ignore logs, build artifacts, Terraform state, node_modules, etc.
+*.log
+*.tfstate
+node_modules/
+.terraform/
+.env
+__pycache__/
+.DS_Store
