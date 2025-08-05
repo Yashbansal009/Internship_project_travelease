@@ -1,4 +1,4 @@
-
+version: '3.8'
 services:
   booking-service:
     image: 726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/booking:latest
@@ -46,4 +46,5 @@ services:
 volumes:
   jenkins_data: 
   grafana_data: 
+
 
