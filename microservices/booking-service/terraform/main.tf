@@ -15,8 +15,8 @@ resource "aws_security_group" "booking_sg" {
   name        = "booking-service-sg"
   vpc_id      = "vpc-0bc652bfc089f9e1a"
   ingress {
-    from_port   = 8080      # <-- Use your app's port
-    to_port     = 8080      # <-- Use your app's port
+    from_port   = 8080      
+    to_port     = 8080      
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -88,7 +88,7 @@ resource "aws_ecs_service" "booking_service" {
   desired_count   = 2
   launch_type     = "FARGATE"
   network_configuration {
-    subnets         = ["subnet-04aad417a5be11f7e"] # <-- Your actual Subnet ID(s)
+    subnets         = ["subnet-04aad417a5be11f7e"] 
     security_groups = [aws_security_group.booking_sg.id]
     assign_public_ip = true
   }
@@ -97,3 +97,4 @@ resource "aws_ecs_service" "booking_service" {
 # (Optional) Add Load Balancer resources if you want public access and health checks
 
 # REQUIRED: Fill in <your_vpc_id>, <your_subnet_id_1>, <your_subnet_id_2>, <your_aws_account_id>
+
