@@ -94,7 +94,5 @@ resource "aws_ecs_service" "payment_service" {
   }
 }
 
-# REQUIRED: Add ECS cluster, task definition, and service resources as needed
-# Terraform for Payment Service
-# Define AWS resources for ECS/EC2, ALB/NLB, Cloud Map, IAM, ECR
+
 
