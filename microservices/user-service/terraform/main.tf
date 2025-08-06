@@ -14,10 +14,10 @@ resource "aws_ecs_cluster" "user_cluster" {
 
 resource "aws_security_group" "user_sg" {
   name        = "user-service-sg"
-  vpc_id      = "vpc-0bc652bfc089f9e1a"                # <-- FILL: Your VPC ID
+  vpc_id      = "vpc-0bc652bfc089f9e1a"                
   ingress {
-    from_port   = 8080                        # <-- Should be 8080
-    to_port     = 8080                         # <-- Should be 8080
+    from_port   = 8080                        
+    to_port     = 8080                        
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -62,18 +62,18 @@ resource "aws_ecs_task_definition" "user_task" {
   container_definitions    = jsonencode([
     {
       name      = "user"
-      image     = "726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/user:latest" # <-- FILL: Your AWS Account ID
+      image     = "726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/user:latest" 
       essential = true
       portMappings = [
         {
-          containerPort = 8080                      # <-- Should be 8080
-          hostPort      = 8080                       # <-- Should be 8080
+          containerPort = 8080                      
+          hostPort      = 8080                     
         }
       ]
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "/ecs/user"        # <-- OPTIONAL: Change log group name if needed
+          awslogs-group         = "/ecs/user"       
           awslogs-region        = "ap-south-1"
           awslogs-stream-prefix = "ecs"
         }
@@ -89,8 +89,9 @@ resource "aws_ecs_service" "user_service" {
   desired_count   = 2
   launch_type     = "FARGATE"
   network_configuration {
-    subnets         = ["subnet-04aad417a5be11f7e", "<your_subnet_id_2>"] # <-- FILL: Your Subnet IDs
+    subnets         = ["subnet-04aad417a5be11f7e"] 
     security_groups = [aws_security_group.user_sg.id]
     assign_public_ip = true
   }
 }
+
