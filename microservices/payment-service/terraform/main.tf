@@ -13,12 +13,12 @@ resource "aws_ecs_cluster" "payment_cluster" {
 
 resource "aws_security_group" "payment_sg" {
   name        = "payment-service-sg"
-  vpc_id      = "vpc-0bc652bfc089f9e1a"         # <-- FILL: Your VPC ID
+  vpc_id      = "vpc-0bc652bfc089f9e1a"         
   ingress {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]                 # <-- FILL: Restrict if needed
+    cidr_blocks = ["0.0.0.0/0"]                 
   }
   egress {
     from_port   = 0
@@ -61,7 +61,7 @@ resource "aws_ecs_task_definition" "payment_task" {
   container_definitions    = jsonencode([
     {
       name      = "payment"
-      image     = "726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/payment:latest" # <-- FILL: Your AWS Account ID if different
+      image     = "726661503021.dkr.ecr.ap-south-1.amazonaws.com/travelease1/payment:latest" # 
       essential = true
       portMappings = [
         {
@@ -88,7 +88,7 @@ resource "aws_ecs_service" "payment_service" {
   desired_count   = 2
   launch_type     = "FARGATE"
   network_configuration {
-    subnets         = ["subnet-04aad417a5be11f7e", "subnet-xxxxxxxxxxxxxxxxx"] # <-- FILL: Your Subnet IDs
+    subnets         = ["subnet-04aad417a5be11f7e"] 
     security_groups = [aws_security_group.payment_sg.id]
     assign_public_ip = true
   }
@@ -97,3 +97,4 @@ resource "aws_ecs_service" "payment_service" {
 # REQUIRED: Add ECS cluster, task definition, and service resources as needed
 # Terraform for Payment Service
 # Define AWS resources for ECS/EC2, ALB/NLB, Cloud Map, IAM, ECR
+
