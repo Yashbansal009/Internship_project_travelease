@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
 # Terraform configuration for booking-service
 provider "aws" {
   region = "ap-south-1"
@@ -97,4 +105,5 @@ resource "aws_ecs_service" "booking_service" {
 # (Optional) Add Load Balancer resources if you want public access and health checks
 
 # REQUIRED: Fill in <your_vpc_id>, <your_subnet_id_1>, <your_subnet_id_2>, <your_aws_account_id>
+
 
