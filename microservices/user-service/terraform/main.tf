@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
 # Terraform configuration for user-service
 
 provider "aws" {
@@ -94,4 +102,5 @@ resource "aws_ecs_service" "user_service" {
     assign_public_ip = true
   }
 }
+
 
