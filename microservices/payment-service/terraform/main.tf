@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
 # Terraform configuration for payment-service
 provider "aws" {
   region = "ap-south-1"
@@ -93,6 +101,7 @@ resource "aws_ecs_service" "payment_service" {
     assign_public_ip = true
   }
 }
+
 
 
 
